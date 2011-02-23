@@ -1,3 +1,4 @@
+require 'rubygems'
 require 'minitest/autorun'
 require 'bigdecimal'
 require 'cash'
