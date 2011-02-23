@@ -122,9 +122,9 @@ class Cash
 
   def parse_initialize_options(options)
     opts = {
-      cents_in_whole:  self.class.default_cents_in_whole,
-      rounding_method: self.class.default_rounding_method,
-      currency:        self.class.default_currency,
+      :cents_in_whole  => self.class.default_cents_in_whole,
+      :rounding_method => self.class.default_rounding_method,
+      :currency        => self.class.default_currency,
     }.merge(options)
 
     @cents_in_whole  = opts[:cents_in_whole]
