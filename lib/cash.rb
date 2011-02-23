@@ -1,1 +1,1 @@
-require_relative './cash/cash'
+require 'cash/cash'
