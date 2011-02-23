@@ -44,3 +44,17 @@ Usage
 
     n = Cash.new(2.5, rounding_method: BigDecimal::ROUND_HALF_EVEN)
     n.cents #=> 2
+
+    # Sick of specifying :cents_in_whole, :rounding_method and :currency? Just
+    # set their defaults.
+    Cash.default_cents_in_whole  = 10
+    Cash.default_rounding_method = BigDecimal::ROUND_DOWN
+    Cash.default_currency        = :EUR
+
+    n = Cash.new(100)
+    n.to_s     #=> "10.0"
+    n.to_f     #=> 10.0
+    n.currency #=> :EUR
+
+    n = Cash.new(1.9)
+    n.cents #=> 1
