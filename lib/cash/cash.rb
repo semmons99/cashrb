@@ -5,10 +5,27 @@ require 'bigdecimal'
 class Cash
   class IncompatibleCurrency < ArgumentError; end
 
+  DEFAULT_CENTS_IN_WHOLE  = 100
   DEFAULT_ROUNDING_METHOD = BigDecimal::ROUND_HALF_UP
+  DEFAULT_CURRENCY        = nil
+
   CURRENCY_AWARE_METHODS  = [
     :+, :-, :/, :%, :divmod, :==, :<=>, :>, :<, :>=, :<=
   ]
+
+  class << self
+    attr_accessor :default_cents_in_whole
+    attr_accessor :default_rounding_method
+    attr_accessor :default_currency
+
+    def reset_defaults
+      @default_cents_in_whole  = DEFAULT_CENTS_IN_WHOLE
+      @default_rounding_method = DEFAULT_ROUNDING_METHOD
+      @default_currency        = DEFAULT_CURRENCY
+    end
+  end
+
+  reset_defaults
 
   attr_reader :currency
 
@@ -105,9 +122,9 @@ class Cash
 
   def parse_initialize_options(options)
     opts = {
-      cents_in_whole:  100,
-      rounding_method: DEFAULT_ROUNDING_METHOD,
-      currency:        nil
+      cents_in_whole:  self.class.default_cents_in_whole,
+      rounding_method: self.class.default_rounding_method,
+      currency:        self.class.default_currency,
     }.merge(options)
 
     @cents_in_whole  = opts[:cents_in_whole]

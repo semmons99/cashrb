@@ -4,6 +4,31 @@ require 'cash'
 
 class TestCash < MiniTest::Unit::TestCase
 
+  def teardown
+    Cash.reset_defaults
+  end
+
+  def test_default_cents_in_whole
+    Cash.default_cents_in_whole = 10
+
+    rs = Cash.new(100)
+    assert_equal "10.0", rs.to_s
+  end
+
+  def test_default_rounding_method
+    Cash.default_rounding_method = BigDecimal::ROUND_DOWN
+
+    rs = Cash.new(1.9)
+    assert_equal 1, rs.cents
+  end
+
+  def test_default_currency
+    Cash.default_currency = :usd
+
+    rs = Cash.new(100)
+    assert_equal :usd, rs.currency
+  end
+
   def test_new
     rs = Cash.new(100)
     assert_equal 100, rs.cents
