@@ -36,8 +36,8 @@ Usage
     n.to_s  #=> "100"
     n.to_f  #=> 100.0
 
-    # The default rounding method when dealing with fraction cents is
-    # BigDecimal::ROUND_HALF_UP. Would you rather use bankers rounding, just
+    # The default rounding method when dealing with fractional cents is
+    # BigDecimal::ROUND_HALF_UP. Would you rather use bankers rounding; just
     # pass it as an argument.
     n = Cash.new(2.5)
     n.cents #=> 3
@@ -45,7 +45,7 @@ Usage
     n = Cash.new(2.5, rounding_method: BigDecimal::ROUND_HALF_EVEN)
     n.cents #=> 2
 
-    # Sick of specifying :cents_in_whole, :rounding_method and :currency? Just
+    # Sick of specifying :cents_in_whole, :rounding_method and :currency; just
     # set their defaults.
     Cash.default_cents_in_whole  = 10
     Cash.default_rounding_method = BigDecimal::ROUND_DOWN
