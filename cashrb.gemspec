@@ -1,10 +1,10 @@
 Gem::Specification.new do |s|
-  s.name        = "cash"
+  s.name        = "cashrb"
   s.version     = "0.1.0"
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Shane Emmons"]
   s.email       = ["semmons99@gmail.com"]
-  s.homepage    = "http://github.com/semmons99/cash"
+  s.homepage    = "http://github.com/semmons99/cashrb"
   s.summary     = "Dead simple gem to work with Money/Currency without the hassle of Floats"
   s.description = "Dead simple gem to work with Money/Currency without the hassle of Floats"
 
@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
 
   s.files =  Dir.glob("{lib,test}/**/*")
   s.files += %w(CHANGELOG.md LICENSE README.md)
-  s.files += %w(Rakefile .gemtest cash.gemspec)
+  s.files += %w(Rakefile .gemtest cashrb.gemspec)
 
   s.require_path = "lib"
 end

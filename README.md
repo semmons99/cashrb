@@ -1,5 +1,5 @@
-Cash
-====
+cashrb
+======
 
 Dead simple gem to work with Money/Currency without the hassle of Floats.
 
