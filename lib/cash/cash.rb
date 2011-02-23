@@ -105,6 +105,17 @@ class Cash
     self.to_s.to_f
   end
 
+  CURRENCY_AWARE_METHODS.each do |mth|
+    old_mth = :"old_#{mth}"
+    alias_method old_mth, mth
+    private(old_mth)
+
+    define_method(mth) do |value|
+      reject_incompatible_currency(value)
+      send(old_mth, value)
+    end
+  end
+
   private
 
   def bd(val)
@@ -143,17 +154,6 @@ class Cash
       raise IncompatibleCurrency, "#{value.currency} != #{currency}"
     end
   rescue NoMethodError
-  end
-
-  CURRENCY_AWARE_METHODS.each do |mth|
-    old_mth = :"old_#{mth}"
-    alias_method old_mth, mth
-    private(old_mth)
-
-    define_method(mth) do |value|
-      reject_incompatible_currency(value)
-      send(old_mth, value)
-    end
   end
 
 end
