@@ -15,8 +15,8 @@ Usage
     n.to_f  #=> 1.0
 
     # Define currency as you see fit.
-    a = Cash.new(100, :usd)
-    b = Cash.new(100, :eur)
+    a = Cash.new(100, currency: :usd)
+    b = Cash.new(100, currency: :eur)
     a + b #=> Error! Cash::IncompatibleCurrency
 
     # Default is 100 cents in a dollar. Is your currency different, then just
