@@ -3,6 +3,8 @@ require 'bigdecimal'
 ##
 # Provides methods for performing financial calculations without using floats.
 class Cash
+  include Comparable
+
   class IncompatibleCurrency < ArgumentError; end
 
   DEFAULT_CENTS_IN_WHOLE  = 100
@@ -70,28 +72,8 @@ class Cash
     [Cash.new(quotient), Cash.new(remainder)]
   end
 
-  def ==(value)
-    @cents == value.cents
-  end
-
   def <=>(value)
     @cents <=> value.cents
-  end
-
-  def >(value)
-    @cents > value.cents
-  end
-
-  def <(value)
-    @cents < value.cents
-  end
-
-  def >=(value)
-    @cents >= value.cents
-  end
-
-  def <=(value)
-    @cents <= value.cents
   end
 
   def to_s
