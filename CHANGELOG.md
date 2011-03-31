@@ -1,3 +1,7 @@
+cashrb v1.0.3
+=============
+ - change to "require 'cashrb'" to avoid clash with 'cash' gem
+
 cashrb v1.0.2
 =============
  - fix error with scope for ruby 1.8.7
