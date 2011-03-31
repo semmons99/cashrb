@@ -6,7 +6,7 @@ Dead simple gem to work with Money/Currency without the hassle of Floats.
 Usage
 -----
 
-    require 'cash'
+    require 'cashrb'
 
     # Works with cents to avoid Floating point errors
     n = Cash.new(100)

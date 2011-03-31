@@ -1,6 +1,6 @@
 require 'minitest/autorun'
 require 'bigdecimal'
-require 'cash'
+require 'cashrb/cash'
 
 class TestCash < MiniTest::Unit::TestCase
 
