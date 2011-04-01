@@ -11,9 +11,7 @@ class Cash
   DEFAULT_ROUNDING_METHOD = BigDecimal::ROUND_HALF_UP
   DEFAULT_CURRENCY        = nil
 
-  CURRENCY_AWARE_METHODS  = [
-    :+, :-, :/, :%, :divmod, :==, :<=>, :>, :<, :>=, :<=
-  ]
+  CURRENCY_AWARE_METHODS  = [:+, :-, :/, :%, :divmod, :<=>]
 
   class << self
     attr_accessor :default_cents_in_whole

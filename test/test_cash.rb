@@ -136,9 +136,8 @@ class TestCash < MiniTest::Unit::TestCase
   end
 
   def test_equal_to_with_different_currencies
-    assert_raises Cash::IncompatibleCurrency do
-      Cash.new(6) == Cash.new(6, :currency => :usd)
-    end
+    rs = Cash.new(6) == Cash.new(6, :currency => :usd)
+    refute rs
   end
 
   def test_compare_when_greater_than
