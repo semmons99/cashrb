@@ -118,10 +118,14 @@ class Cash
       :currency        => self.class.default_currency,
     }.merge(options)
 
-    @cents_in_whole  = opts[:cents_in_whole]
+    @currency        = opts[:currency]
+    @cents_in_whole  = if @currency.respond_to? :cents_in_whole
+                         @currency.cents_in_whole 
+                       else
+                         opts[:cents_in_whole]
+                       end
     @decimal_places  = decimal_places(@cents_in_whole)
     @rounding_method = opts[:rounding_method]
-    @currency        = opts[:currency]
     nil
   end
 

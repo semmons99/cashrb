@@ -58,3 +58,15 @@ Usage
 
     n = Cash.new(1.9)
     n.cents #=> 1
+
+    # If your currency object implements :cents_in_whole, we'll go ahead and
+    # use that.
+
+    module MyCurrency
+      def self.cents_in_whole
+        10
+      end
+    end
+
+    n = Cash.new(9, :currency => MyCurrency)
+    n.to_f #=> 0.9

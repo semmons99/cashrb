@@ -50,6 +50,14 @@ class TestCash < MiniTest::Unit::TestCase
     assert_equal :usd, rs.currency
   end
 
+  def test_new_with_currency_respond_to_cents_in_whole
+    currency = MiniTest::Mock.new
+    currency.expect(:cents_in_whole, 10)
+
+    rs = Cash.new(9, :currency => currency)
+    assert_equal 0.9, rs.to_f
+  end
+
   def test_plus_with_Cash_Cash
     rs = Cash.new(6) + Cash.new(4)
     assert_equal Cash.new(10), rs
