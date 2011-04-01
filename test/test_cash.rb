@@ -127,12 +127,12 @@ class TestCash < MiniTest::Unit::TestCase
 
   def test_equal_to_when_equal_to
     rs = Cash.new(6) == Cash.new(6)
-    assert true
+    assert rs
   end
 
   def test_equal_to_when_not_equal_to
     rs = Cash.new(6) == Cash.new(4)
-    refute false
+    refute rs
   end
 
   def test_equal_to_with_different_currencies
@@ -163,17 +163,17 @@ class TestCash < MiniTest::Unit::TestCase
 
   def test_greater_than_when_greater_than
     rs = Cash.new(6) > Cash.new(4)
-    assert true
+    assert rs
   end
 
   def test_greater_than_when_less_than
     rs = Cash.new(4) > Cash.new(6)
-    refute false
+    refute rs
   end
 
   def test_greater_than_when_equal_to
     rs = Cash.new(6) > Cash.new(6)
-    refute false
+    refute rs
   end
 
   def test_greater_than_with_different_currencies
@@ -184,17 +184,17 @@ class TestCash < MiniTest::Unit::TestCase
 
   def test_less_than_when_greater_than
     rs = Cash.new(6) < Cash.new(4)
-    refute false
+    refute rs
   end
 
   def test_less_than_when_less_than
     rs = Cash.new(4) < Cash.new(6)
-    assert true
+    assert rs
   end
 
   def test_less_than_when_equal_to
     rs = Cash.new(6) < Cash.new(6)
-    refute false
+    refute rs
   end
 
   def test_less_than_with_different_currencies
@@ -205,17 +205,17 @@ class TestCash < MiniTest::Unit::TestCase
 
   def test_greater_than_or_equal_to_when_greater_than
     rs = Cash.new(6) >= Cash.new(4)
-    assert true
+    assert rs
   end
 
   def test_greater_than_or_equal_to_when_less_than
     rs = Cash.new(4) >= Cash.new(6)
-    refute false
+    refute rs
   end
 
   def test_greater_than_or_equal_to_when_equal_to
     rs = Cash.new(6) >= Cash.new(6)
-    assert true
+    assert rs
   end
 
   def test_greater_than_or_equal_to_with_different_currencies
@@ -226,17 +226,17 @@ class TestCash < MiniTest::Unit::TestCase
 
   def test_less_than_or_equal_to_when_greater_than
     rs = Cash.new(6) <= Cash.new(4)
-    refute false
+    refute rs
   end
 
   def test_less_than_or_equal_to_when_less_than
     rs = Cash.new(4) <= Cash.new(6)
-    assert true
+    assert rs
   end
 
   def test_less_than_or_equal_to_when_equal_to
     rs = Cash.new(6) <= Cash.new(6)
-    assert true
+    assert rs
   end
 
   def test_less_than_or_equal_to_with_different_currencies
