@@ -1,3 +1,10 @@
+cashrb v1.1.0
+=============
+ - use "include Comparable" instead of custom functions
+ - #== no longer throws an IncompatibleCurrency exception
+ - cleanup tests that we auto passing
+ - if currency implements :cents_in_whole, use it
+
 cashrb v1.0.3
 =============
  - change to "require 'cashrb'" to avoid clash with 'cash' gem
