@@ -275,6 +275,10 @@ class TestCash < MiniTest::Unit::TestCase
     assert_equal "1.000", Cash.new(1000, :cents_in_whole => 1000).to_s
   end
 
+  def test_to_s_with_negative_cents
+    assert_equal "-6338.33", Cash.new(-633833).to_s
+  end
+
   def test_to_f
     assert_equal 0.0,  Cash.new(0  ).to_f
     assert_equal 0.01, Cash.new(1  ).to_f
@@ -295,6 +299,10 @@ class TestCash < MiniTest::Unit::TestCase
     assert_equal 1.0,   Cash.new(100,  :cents_in_whole => 100 ).to_f
     assert_equal 0.999, Cash.new(999,  :cents_in_whole => 1000).to_f
     assert_equal 1.0,   Cash.new(1000, :cents_in_whole => 1000).to_f
+  end
+
+  def test_to_f_with_negative_cents
+    assert_equal -6338.33, Cash.new(-633833).to_f
   end
 
 end

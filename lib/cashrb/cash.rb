@@ -78,7 +78,7 @@ class Cash
     return self.cents.to_s if @cents_in_whole == 1
 
     dollars, cents = dollars_and_cents
-    "#{dollars}.#{formatted_cents(cents)}"
+    "#{"-" if @cents < 0}#{dollars}.#{formatted_cents(cents)}"
   end
 
   def to_f
@@ -103,7 +103,7 @@ class Cash
   end
 
   def dollars_and_cents
-    @cents.divmod(@cents_in_whole).map(&:to_i)
+    @cents.abs.divmod(@cents_in_whole).map(&:to_i)
   end
 
   def formatted_cents(cents)
