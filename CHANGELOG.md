@@ -1,3 +1,7 @@
+cashrb v1.1.1
+=============
+ - fix bug in #to_s/#to_f regarding negative amounts
+
 cashrb v1.1.0
 =============
  - use "include Comparable" instead of custom functions
