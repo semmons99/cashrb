@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Shane Emmons"]
   s.email       = ["semmons99@gmail.com"]
-  s.homepage    = "http://github.com/semmons99/cashrb"
+  s.homepage    = "http://semmons99.github.com/cashrb/"
   s.summary     = "Dead simple gem to work with Money/Currency without the hassle of Floats"
   s.description = "Dead simple gem to work with Money/Currency without the hassle of Floats"
 
