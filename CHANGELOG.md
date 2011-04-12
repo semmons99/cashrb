@@ -1,3 +1,7 @@
+cashrb v1.2.0
+=============
+ - allow creation using decimal values instead of cents if you'd rather
+
 cashrb v1.1.1
 =============
  - fix bug in #to_s/#to_f regarding negative amounts
