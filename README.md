@@ -14,6 +14,17 @@ Usage
     n.to_s  #=> "1.00"
     n.to_f  #=> 1.0
 
+    # Don't like passing cents, set :from => :decimal and use a decimal value
+    n = Cash.new(1.11, from: :decimal)
+    n.cents #=> 111
+    n.to_s  #=> "1.11"
+    n.to_f  #=> 1.11
+
+    # Hate cents and always want to pass a decimal, just set the default
+    Cash.default_from = :decimal
+    n = Cash.new(1.11)
+    n.cents #=> 111
+
     # Define currency as you see fit.
     a = Cash.new(100, currency: :usd)
     b = Cash.new(100, currency: :eur)

@@ -29,6 +29,19 @@ class TestCash < MiniTest::Unit::TestCase
     assert_equal :usd, rs.currency
   end
 
+  def test_default_from
+    Cash.default_from = :decimal
+
+    rs = Cash.new(1.11)
+    assert_equal 111, rs.cents
+  end
+
+  def test_invalid_default_from
+    assert_raises ArgumentError do
+      Cash.default_from = :foo
+    end
+  end
+
   def test_new
     rs = Cash.new(100)
     assert_equal 100, rs.cents
@@ -56,6 +69,67 @@ class TestCash < MiniTest::Unit::TestCase
 
     rs = Cash.new(9, :currency => currency)
     assert_equal 0.9, rs.to_f
+  end
+
+  def test_new_with_from
+    rs = Cash.new(111, :from => :cents)
+    assert_equal 111, rs.cents
+
+    rs = Cash.new(1.11, :from => :decimal)
+    assert_equal 111, rs.cents
+  end
+
+  def test_new_with_from_and_cents_in_whole
+    rs = Cash.new(111, :from => :cents, :cents_in_whole => 1)
+    assert_equal 111, rs.cents
+
+    rs = Cash.new(111, :from => :cents, :cents_in_whole => 5)
+    assert_equal 111, rs.cents
+
+    rs = Cash.new(111, :from => :cents, :cents_in_whole => 10)
+    assert_equal 111, rs.cents
+
+    rs = Cash.new(111, :from => :cents, :cents_in_whole => 100)
+    assert_equal 111, rs.cents
+
+    rs = Cash.new(111, :from => :cents, :cents_in_whole => 1000)
+    assert_equal 111, rs.cents
+
+    rs = Cash.new(1.0, :from => :decimal, :cents_in_whole => 1)
+    assert_equal 1, rs.cents
+
+    rs = Cash.new(1.1, :from => :decimal, :cents_in_whole => 5)
+    assert_equal 6, rs.cents
+
+    rs = Cash.new(1.1, :from => :decimal, :cents_in_whole => 10)
+    assert_equal 11, rs.cents
+
+    rs = Cash.new(1.11, :from => :decimal, :cents_in_whole => 100)
+    assert_equal 111, rs.cents
+
+    rs = Cash.new(1.01, :from => :decimal, :cents_in_whole => 100)
+    assert_equal 101, rs.cents
+
+    rs = Cash.new(1.00, :from => :decimal, :cents_in_whole => 100)
+    assert_equal 100, rs.cents
+
+    rs = Cash.new(1.111, :from => :decimal, :cents_in_whole => 1000)
+    assert_equal 1111, rs.cents
+
+    rs = Cash.new(1.011, :from => :decimal, :cents_in_whole => 1000)
+    assert_equal 1011, rs.cents
+
+    rs = Cash.new(1.001, :from => :decimal, :cents_in_whole => 1000)
+    assert_equal 1001, rs.cents
+
+    rs = Cash.new(1.000, :from => :decimal, :cents_in_whole => 1000)
+    assert_equal 1000, rs.cents
+  end
+
+  def test_new_with_invalid_from
+    assert_raises ArgumentError do
+      Cash.new(1, :from => :foo)
+    end
   end
 
   def test_plus_with_Cash_Cash
