@@ -1,7 +1,9 @@
 cashrb
 ======
 
-Dead simple gem to work with Money/Currency without the hassle of Floats.
+Lightweight money and currency handler for working with financial calculations.
+Ensures precision without sacrificing speed. Eschews complexity by only
+providing what you need to get your job done.
 
 Usage
 -----
