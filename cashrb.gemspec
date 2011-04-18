@@ -5,8 +5,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Shane Emmons"]
   s.email       = ["semmons99@gmail.com"]
   s.homepage    = "http://semmons99.github.com/cashrb/"
-  s.summary     = "Dead simple gem to work with Money/Currency without the hassle of Floats"
-  s.description = "Dead simple gem to work with Money/Currency without the hassle of Floats"
+  s.summary     = "Lightweight money and currency handler for working with financial calculations."
+  s.description = "Lightweight money and currency handler for working with financial calculations."
 
   s.required_ruby_version     = ">= 1.8.7"
   s.required_rubygems_version = ">= 1.3.6"
