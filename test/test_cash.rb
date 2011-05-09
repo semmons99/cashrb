@@ -143,6 +143,16 @@ class TestCash < MiniTest::Unit::TestCase
     end
   end
 
+  def test_plus_with_modified_defaults
+    Cash.default_cents_in_whole  = 10
+    Cash.default_rounding_method = BigDecimal::ROUND_UP
+    Cash.default_currency        = :usd
+    Cash.default_from            = :decimal
+
+    rs = Cash.new(10) + Cash.new(5)
+    assert_equal Cash.new(15), rs
+  end
+
   def test_minus_with_Cash_Cash
     rs = Cash.new(6) - Cash.new(4)
     assert_equal Cash.new(2), rs
@@ -154,9 +164,29 @@ class TestCash < MiniTest::Unit::TestCase
     end
   end
 
+  def test_minus_with_modified_defaults
+    Cash.default_cents_in_whole  = 10
+    Cash.default_rounding_method = BigDecimal::ROUND_UP
+    Cash.default_currency        = :usd
+    Cash.default_from            = :decimal
+
+    rs = Cash.new(10) - Cash.new(5)
+    assert_equal Cash.new(5), rs
+  end
+
   def test_multiply_with_Cash_Numeric
     rs = Cash.new(6) * 2
     assert_equal Cash.new(12), rs
+  end
+
+  def test_multiply_with_modified_defaults
+    Cash.default_cents_in_whole  = 10
+    Cash.default_rounding_method = BigDecimal::ROUND_UP
+    Cash.default_currency        = :usd
+    Cash.default_from            = :decimal
+
+    rs = Cash.new(10) * 5
+    assert_equal Cash.new(50), rs
   end
 
   def test_divide_with_Cash_Cash
@@ -175,6 +205,16 @@ class TestCash < MiniTest::Unit::TestCase
     assert_equal Cash.new(3), rs
   end
 
+  def test_divide_with_modified_defaults
+    Cash.default_cents_in_whole  = 10
+    Cash.default_rounding_method = BigDecimal::ROUND_UP
+    Cash.default_currency        = :usd
+    Cash.default_from            = :decimal
+
+    rs = Cash.new(10) / 5
+    assert_equal Cash.new(2), rs
+  end
+
   def test_modulo_with_Cash_Cash
     rs = Cash.new(6) % Cash.new(4)
     assert_equal Cash.new(2), rs
@@ -191,6 +231,16 @@ class TestCash < MiniTest::Unit::TestCase
     assert_equal Cash.new(2), rs
   end
 
+  def test_modulo_with_modified_defaults
+    Cash.default_cents_in_whole  = 10
+    Cash.default_rounding_method = BigDecimal::ROUND_UP
+    Cash.default_currency        = :usd
+    Cash.default_from            = :decimal
+
+    rs = Cash.new(6) % 7
+    assert_equal Cash.new(0.4), rs
+  end
+
   def test_divmod_with_Cash_Cash
     rs = Cash.new(6).divmod(Cash.new(4))
     assert_equal [BigDecimal("1"), Cash.new(2)], rs
@@ -205,6 +255,16 @@ class TestCash < MiniTest::Unit::TestCase
   def test_divmod_with_Cash_Numeric
     rs = Cash.new(6).divmod(4)
     assert_equal [Cash.new(1), Cash.new(2)], rs
+  end
+
+  def test_divmod_with_modified_defaults
+    Cash.default_cents_in_whole  = 10
+    Cash.default_rounding_method = BigDecimal::ROUND_UP
+    Cash.default_currency        = :usd
+    Cash.default_from            = :decimal
+
+    rs = Cash.new(6).divmod(40)
+    assert_equal [Cash.new(0.1), Cash.new(2)], rs
   end
 
   def test_equal_to_when_equal_to

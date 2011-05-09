@@ -71,35 +71,35 @@ class Cash
   end
 
   def +(value)
-    Cash.new(@cents + value.cents)
+    Cash.new(@cents + value.cents, new_options)
   end
 
   def -(value)
-    Cash.new(@cents - value.cents)
+    Cash.new(@cents - value.cents, new_options)
   end
 
   def *(value)
-    Cash.new(@cents * bd(value))
+    Cash.new(@cents * bd(value), new_options)
   end
 
   def /(value)
     @cents / value.cents
   rescue NoMethodError
-    Cash.new(@cents / bd(value))
+    Cash.new(@cents / bd(value), new_options)
   end
 
   def %(value)
-    Cash.new(@cents % value.cents)
+    Cash.new(@cents % value.cents, new_options)
   rescue NoMethodError
-    Cash.new(@cents % bd(value))
+    Cash.new(@cents % bd(value), new_options)
   end
 
   def divmod(value)
     quotient, remainder = @cents.divmod value.cents
-    [quotient, Cash.new(remainder)]
+    [quotient, Cash.new(remainder, new_options)]
   rescue NoMethodError
     quotient, remainder = @cents.divmod bd(value)
-    [Cash.new(quotient), Cash.new(remainder)]
+    [Cash.new(quotient, new_options), Cash.new(remainder, new_options)]
   end
 
   def <=>(value)
@@ -177,6 +177,15 @@ class Cash
       raise IncompatibleCurrency, "#{value.currency} != #{currency}"
     end
   rescue NoMethodError
+  end
+
+  def new_options
+    {
+      :cents_in_whole  => @cents_in_whole,
+      :rounding_method => @rounding_method,
+      :currency        => @currency,
+      :from            => :cents,
+    }
   end
 
 end
