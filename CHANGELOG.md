@@ -1,3 +1,8 @@
+cashrb v1.2.1
+=============
+ - ensure objects created from internal functions such as (+ - * / % divmod)
+   return new objects that are consistent with their parents options
+
 cashrb v1.2.0
 =============
  - allow creation using decimal values instead of cents if you'd rather
