@@ -154,7 +154,7 @@ class TestCash < MiniTest::Unit::TestCase
     end
   end
 
-  def test_multiple_with_Cash_Numeric
+  def test_multiply_with_Cash_Numeric
     rs = Cash.new(6) * 2
     assert_equal Cash.new(12), rs
   end
