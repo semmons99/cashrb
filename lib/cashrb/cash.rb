@@ -78,6 +78,10 @@ class Cash
     Cash.new(@cents - value.cents, new_options)
   end
 
+  def -@
+    Cash.new(-@cents, new_options)
+  end
+
   def *(value)
     Cash.new(@cents * bd(value), new_options)
   end

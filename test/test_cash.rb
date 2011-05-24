@@ -174,6 +174,21 @@ class TestCash < MiniTest::Unit::TestCase
     assert_equal Cash.new(5), rs
   end
 
+  def test_unary_minus
+    rs = -Cash.new(6)
+    assert_equal Cash.new(-6), rs
+  end
+
+  def test_unary_minus_with_modified_defaults
+    Cash.default_cents_in_whole  = 10
+    Cash.default_rounding_method = BigDecimal::ROUND_UP
+    Cash.default_currency        = :usd
+    Cash.default_from            = :decimal
+
+    rs = -Cash.new(6)
+    assert_equal Cash.new(-6), rs
+  end
+
   def test_multiply_with_Cash_Numeric
     rs = Cash.new(6) * 2
     assert_equal Cash.new(12), rs
