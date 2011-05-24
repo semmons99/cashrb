@@ -1,3 +1,9 @@
+cashrb v1.2.2
+=============
+ - fix formatting in README.md
+ - package using 1.8.7 to remove specification date error caused by 1.9 and
+   rubygems
+
 cashrb v1.2.1
 =============
  - ensure objects created from internal functions such as (+ - * / % divmod)
