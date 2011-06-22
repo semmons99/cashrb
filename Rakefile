@@ -1,8 +1,8 @@
 require 'rake/testtask'
-require 'rake/gempackagetask'
+require 'rubygems/package_task'
 
 Rake::TestTask.new
 
 spec = Gem::Specification.load File.expand_path("../cashrb.gemspec", __FILE__)
-gem  = Rake::GemPackageTask.new(spec)
+gem  = Gem::PackageTask.new(spec)
 gem.define
