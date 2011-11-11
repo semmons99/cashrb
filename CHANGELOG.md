@@ -1,5 +1,5 @@
-HEAD
-====
+cashrb v1.3.0
+=============
  - add #abs
 
 cashrb v1.2.2
