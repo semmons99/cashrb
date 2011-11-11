@@ -106,6 +106,10 @@ class Cash
     [Cash.new(quotient, new_options), Cash.new(remainder, new_options)]
   end
 
+  def abs
+    Cash.new(@cents.abs, new_options)
+  end
+
   def <=>(value)
     @cents <=> value.cents
   end

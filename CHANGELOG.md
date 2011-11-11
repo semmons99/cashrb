@@ -1,3 +1,7 @@
+HEAD
+====
+ - add #abs
+
 cashrb v1.2.2
 =============
  - fix formatting in README.md

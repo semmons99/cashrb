@@ -282,6 +282,14 @@ class TestCash < MiniTest::Unit::TestCase
     assert_equal [Cash.new(0.1), Cash.new(2)], rs
   end
 
+  def test_abs_with_positive_cents
+    assert_equal Cash.new(120), Cash.new(120).abs
+  end
+
+  def test_abs_with_negative_cents
+    assert_equal Cash.new(120), Cash.new(-120).abs
+  end
+
   def test_equal_to_when_equal_to
     rs = Cash.new(6) == Cash.new(6)
     assert rs
