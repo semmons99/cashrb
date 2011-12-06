@@ -1,3 +1,7 @@
+cashrb v1.3.1
+=============
+ - update minitest to be a development dependency not a runtime dependency
+
 cashrb v1.3.0
 =============
  - add #abs
