@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "cashrb"
-  s.version     = "1.3.1"
+  s.version     = "1.4.1"
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Shane Emmons"]
   s.email       = ["semmons99@gmail.com"]
