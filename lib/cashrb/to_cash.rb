@@ -1,14 +1,14 @@
 require 'bigdecimal'
 
 module ConvertsToCash
-  def to_cash
-    Cash.new(self)
+  def to_cash(opts={})
+    Cash.new(self, opts)
   end
 end
 
 module ConvertsStringToCash
-  def to_cash
-    Cash.new(cleaned_self)
+  def to_cash(opts={})
+    Cash.new(cleaned_self, opts)
   end
 
   def cleaned_self
