@@ -25,4 +25,7 @@ class TestToCash < MiniTest::Unit::TestCase
     assert_equal '£123.45'.to_cash, Cash.new(123.45)
     assert_equal '£12,345.67'.to_cash, Cash.new(12345.67)
   end
+  def test_cash_objects_convert_to_cash_objects
+    assert_equal Cash.new(123.45).to_cash, Cash.new(123.45)
+  end
 end
