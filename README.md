@@ -87,4 +87,18 @@ end
 n = Cash.new(9, :currency => MyCurrency)
 n.to_f #=> 0.9
 
+# Convert existing values into Cash objects
+100.to_cash #=> Cash.new(100)
+100.00.to_cash #=> Cash.new(100.00)
+price = BigDecimal.new(100)
+price.to_cash #=> Cash.new(price)
+
+# Even works with formatted strings!
+
+'£12,345.67'.to_cash #=> Cash.new(12345.67)
+
+# all options are passed through too
+
+123.45.to_cash(from: :decimal) #=> Cash.new(123.45, from: :decimal)
+
 ```
