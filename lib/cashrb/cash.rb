@@ -125,6 +125,10 @@ class Cash
     self.to_s.to_f
   end
 
+  def to_cash
+    self
+  end
+
   CURRENCY_AWARE_METHODS.each do |mth|
     old_mth = :"old_#{mth}"
     alias_method old_mth, mth

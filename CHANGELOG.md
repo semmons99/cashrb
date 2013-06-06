@@ -1,3 +1,7 @@
+cashrb v1.4.1
+=============
+ - added a to_cash method to Fixnums, Floats, BigDecimals and Strings
+
 cashrb v1.3.1
 =============
  - update minitest to be a development dependency not a runtime dependency
