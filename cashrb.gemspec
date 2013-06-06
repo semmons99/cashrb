@@ -2,7 +2,7 @@ Gem::Specification.new do |s|
   s.name        = "cashrb"
   s.version     = "1.4.1"
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Shane Emmons"]
+  s.authors     = ["Shane Emmons", "Jules Copeland"]
   s.email       = ["semmons99@gmail.com"]
   s.homepage    = "http://semmons99.github.com/cashrb/"
   s.summary     = "Lightweight money and currency handler for working with financial calculations."
