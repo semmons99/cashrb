@@ -1,4 +1,4 @@
-cashrb v1.4.1
+cashrb v1.4.0
 =============
  - added a to_cash method to Fixnums, Floats, BigDecimals and Strings
 
