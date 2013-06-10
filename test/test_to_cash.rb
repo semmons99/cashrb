@@ -29,9 +29,9 @@ class TestToCash < MiniTest::Unit::TestCase
     assert_equal Cash.new(123.45).to_cash, Cash.new(123.45)
   end
   def test_passes_options_through_on_numerics
-    assert_equal 123.45.to_cash(decimal: true), Cash.new(123.45, decimal: true)
+    assert_equal 123.45.to_cash(:decimal => true), Cash.new(123.45, :decimal => true)
   end
   def test_passes_options_through_on_strings
-    assert_equal '£123.45'.to_cash(decimal: true), Cash.new(123.45, decimal: true)
+    assert_equal '£123.45'.to_cash(:decimal => true), Cash.new(123.45, :decimal => true)
   end
 end
