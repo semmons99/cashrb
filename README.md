@@ -13,9 +13,10 @@ Usage
 ```ruby
 require 'cashrb'
 
-# Works with cents to avoid Floating point errors
+# Works with cents to avoid Floating point errors. (You can use `cents` or `pence` interchangeably)
 n = Cash.new(100)
 n.cents #=> 100
+n.pence #=> 100
 n.to_s  #=> "1.00"
 n.to_f  #=> 1.0
 

@@ -1,4 +1,9 @@
-cashrb v1.4.1
+cashrb v1.4.2
+=============
+ - aliased pence to the cents methods for us Brits...
+ - fixed tests to use 1.8.7 hash syntax
+
+ cashrb v1.4.1
 =============
  - added a to_cash method to Fixnums, Floats, BigDecimals and Strings
 
