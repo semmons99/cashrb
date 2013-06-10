@@ -47,19 +47,6 @@ class TestCash < MiniTest::Unit::TestCase
     end
   end
 
-  def test_default_vat
-    Cash.default_vat = 25
-    rs = Cash.new(100)
-    assert_equal rs.cents_plus_vat, 125
-    assert_equal rs.pence_plus_vat, 125
-  end
-
-  def test_default_vat_included
-    Cash.default_vat_included = true
-    rs = Cash.new(120)
-    assert_equal rs.vat_included?, true
-  end
-
   def test_new
     rs = Cash.new(100)
     assert_equal 100, rs.cents
@@ -87,11 +74,6 @@ class TestCash < MiniTest::Unit::TestCase
 
     rs = Cash.new(9, :currency => currency)
     assert_equal 0.9, rs.to_f
-  end
-
-  def test_new_with_vat
-    rs = Cash.new(100, :vat => 17.5)
-    assert_equal rs.cents_plus_vat, 117.5
   end
 
   def test_new_with_from
@@ -483,6 +465,26 @@ class TestCash < MiniTest::Unit::TestCase
 
   def test_to_f_with_negative_cents
     assert_equal -6338.33, Cash.new(-633833).to_f
+  end
+
+  # VAT related tests
+
+  def test_default_vat
+    Cash.default_vat = 25
+    rs = Cash.new(100)
+    assert_equal rs.cents_plus_vat, 125
+    assert_equal rs.pence_plus_vat, 125
+  end
+
+  def test_new_with_vat
+    rs = Cash.new(100, :vat => 17.5)
+    assert_equal rs.cents_plus_vat, 117.5
+  end
+
+  def test_default_vat_included
+    Cash.default_vat_included = true
+    rs = Cash.new(120)
+    assert_equal rs.vat_included?, true
   end
 
 end
