@@ -51,6 +51,13 @@ class TestCash < MiniTest::Unit::TestCase
     Cash.default_vat = 25
     rs = Cash.new(100)
     assert_equal rs.cents_plus_vat, 125
+    assert_equal rs.pence_plus_vat, 125
+  end
+
+  def test_default_vat_included
+    Cash.default_vat_included = true
+    rs = Cash.new(120)
+    assert_equal rs.vat_included?, true
   end
 
   def test_new

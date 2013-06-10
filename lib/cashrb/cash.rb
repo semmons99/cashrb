@@ -11,6 +11,7 @@ class Cash
   DEFAULT_ROUNDING_METHOD = BigDecimal::ROUND_HALF_UP
   DEFAULT_CURRENCY        = nil
   DEFAULT_VAT             = 20
+  DEFAULT_VAT_INCLUDED    = false
   DEFAULT_FROM            = :cents
 
   VALID_FROMS             = [:cents, :decimal]
@@ -23,6 +24,7 @@ class Cash
       @default_rounding_method = DEFAULT_ROUNDING_METHOD
       @default_currency        = DEFAULT_CURRENCY
       @default_vat             = DEFAULT_VAT
+      @default_vat_included    = DEFAULT_VAT_INCLUDED
       @default_from            = DEFAULT_FROM
     end
 
@@ -38,6 +40,7 @@ class Cash
     attr_accessor :default_rounding_method
     attr_accessor :default_currency
     attr_accessor :default_vat
+    attr_accessor :default_vat_included
     attr_reader   :default_from
 
     def default_from=(from)
@@ -73,11 +76,13 @@ class Cash
     @cents.to_i
   end
 
+  alias_method :pence, :cents
+
   def cents_plus_vat
     cents * (1 + (@vat/100))
   end
 
-  alias_method :pence, :cents
+  alias_method :pence_plus_vat, :cents_plus_vat
 
   def +(value)
     Cash.new(@cents + value.cents, new_options)
@@ -138,6 +143,10 @@ class Cash
     self
   end
 
+  def vat_included?
+    @vat_included
+  end
+
   CURRENCY_AWARE_METHODS.each do |mth|
     old_mth = :"old_#{mth}"
     alias_method old_mth, mth
@@ -170,6 +179,7 @@ class Cash
       :rounding_method => self.class.default_rounding_method,
       :currency        => self.class.default_currency,
       :vat             => self.class.default_vat,
+      :vat_included    => self.class.default_vat_included,
       :from            => self.class.default_from
     }.merge(options)
 
@@ -182,6 +192,7 @@ class Cash
     @decimal_places  = decimal_places(@cents_in_whole)
     @rounding_method = opts[:rounding_method]
     @vat             = bd(opts[:vat])
+    @vat_included    = opts[:vat_included]
 
     unless self.class.valid_from? opts[:from]
       raise ArgumentError,
