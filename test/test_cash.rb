@@ -15,6 +15,11 @@ class TestCash < MiniTest::Unit::TestCase
     assert_equal "10.0", rs.to_s
   end
 
+  def test_pence_aliases_cents
+    rs = Cash.new(100)
+    assert_equal rs.cents, rs.pence
+  end
+
   def test_default_rounding_method
     Cash.default_rounding_method = BigDecimal::ROUND_DOWN
 

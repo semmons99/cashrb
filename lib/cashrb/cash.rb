@@ -70,6 +70,8 @@ class Cash
     @cents.to_i
   end
 
+  alias_method :pence, :cents
+
   def +(value)
     Cash.new(@cents + value.cents, new_options)
   end
