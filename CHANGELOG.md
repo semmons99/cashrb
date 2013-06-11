@@ -1,3 +1,7 @@
+cashrb v1.5.0
+=============
+ - added VAT calculations
+
 cashrb v1.4.1
 =============
  - aliased pence to the cents methods for us Brits...
