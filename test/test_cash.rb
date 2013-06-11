@@ -482,9 +482,21 @@ class TestCash < MiniTest::Unit::TestCase
   end
 
   def test_default_vat_included
-    Cash.default_vat_included = true
+    Cash.default_vat_included = :true
     rs = Cash.new(120)
     assert_equal rs.vat_included?, true
   end
 
+  def test_cent_plus_vat_with_vat_included
+    rs = Cash.new(120, :vat_included => :true)
+    assert_equal rs.cents_plus_vat, rs.cents
+  end
+  def test_cent_less_vat_with_vat_included
+    rs = Cash.new(120, :vat_included => :true)
+    assert_equal rs.cents_less_vat, BigDecimal.new(100)
+  end
+  def test_cent_less_vat_without_vat_included
+    rs = Cash.new(120)
+    assert_equal rs.cents_less_vat, rs.cents
+  end
 end

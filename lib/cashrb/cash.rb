@@ -11,10 +11,11 @@ class Cash
   DEFAULT_ROUNDING_METHOD = BigDecimal::ROUND_HALF_UP
   DEFAULT_CURRENCY        = nil
   DEFAULT_VAT             = 20
-  DEFAULT_VAT_INCLUDED    = false
+  DEFAULT_VAT_INCLUDED    = :false
   DEFAULT_FROM            = :cents
 
   VALID_FROMS             = [:cents, :decimal]
+  VALID_VAT_INCLUSION     = [:true, :false, :mixed]
 
   CURRENCY_AWARE_METHODS  = [:+, :-, :/, :%, :divmod, :<=>]
 
@@ -32,6 +33,10 @@ class Cash
       VALID_FROMS.include? from
     end
 
+    def valid_vat_inclusion?(inclusion)
+      VALID_VAT_INCLUSION.include? inclusion
+    end
+
     def bd(val)
       BigDecimal(val.to_s)
     end
@@ -40,7 +45,7 @@ class Cash
     attr_accessor :default_rounding_method
     attr_accessor :default_currency
     attr_accessor :default_vat
-    attr_accessor :default_vat_included
+    attr_reader   :default_vat_included
     attr_reader   :default_from
 
     def default_from=(from)
@@ -49,6 +54,14 @@ class Cash
           "invalid ':from'. valid values are #{VALID_FROMS.join(",")}"
       end
       @default_from = from
+    end
+
+    def default_vat_included=(inclusion)
+      unless valid_vat_inclusion? inclusion
+        raise ArgumentError,
+          "invalid ':vat_included'. valid values are #{VALID_VAT_INCLUSION.join(",")}"
+      end
+      @default_vat_included = inclusion
     end
   end
 
@@ -79,10 +92,24 @@ class Cash
   alias_method :pence, :cents
 
   def cents_plus_vat
-    cents * (1 + (@vat/100))
+    if vat_included?
+      cents
+    else
+      cents * (1 + (@vat/100))
+    end
   end
 
   alias_method :pence_plus_vat, :cents_plus_vat
+
+  def cents_less_vat
+    if vat_included?
+      cents / (1 + (@vat/100))
+    else
+      cents
+    end
+  end
+
+  alias_method :pence_less_vat, :cents_less_vat
 
   def +(value)
     Cash.new(@cents + value.cents, new_options)
@@ -144,7 +171,7 @@ class Cash
   end
 
   def vat_included?
-    @vat_included
+    @vat_included == :true
   end
 
   CURRENCY_AWARE_METHODS.each do |mth|
@@ -219,6 +246,8 @@ class Cash
       :rounding_method => @rounding_method,
       :currency        => @currency,
       :from            => :cents,
+      :vat             => @vat,
+      :vat_included    => @vat_included
     }
   end
 
