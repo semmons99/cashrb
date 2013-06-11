@@ -116,7 +116,7 @@ class Cash
   end
 
   def -(value)
-    Cash.new(@cents - value.cents, new_options)
+    Cash.new(@cents - value.cents, new_options(value))
   end
 
   def -@

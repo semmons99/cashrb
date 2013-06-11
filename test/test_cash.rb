@@ -513,4 +513,10 @@ class TestCash < MiniTest::Unit::TestCase
     refute addition.vat_included?, 'vat seems to be included'
     assert addition.vat_mixed?, 'vat should be mixed'
   end
+
+  def test_mixed_vat_for_subtraction
+    subtraction = cash_with_vat - cash_without_vat
+    refute subtraction.vat_included?, 'vat seems to be included'
+    assert subtraction.vat_mixed?, 'vat should be mixed'
+  end
 end
