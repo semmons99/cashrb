@@ -1,3 +1,7 @@
+cashrb v1.5.1
+=============
+ - added .add_vat and .remove_vat methods that operate on the object itself
+
 cashrb v1.5.0
 =============
  - added VAT calculations

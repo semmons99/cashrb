@@ -111,6 +111,16 @@ class Cash
 
   alias_method :pence_less_vat, :cents_less_vat
 
+  def add_vat
+    @cents = cents_plus_vat
+    @vat_included = :true
+  end
+
+  def remove_vat
+    @cents = cents_less_vat
+    @vat_included = :false
+  end
+
   def +(value)
     Cash.new(@cents + value.cents, new_options(value))
   end

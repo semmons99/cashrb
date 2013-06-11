@@ -500,6 +500,34 @@ class TestCash < MiniTest::Unit::TestCase
     assert_equal rs.cents_less_vat, rs.cents
   end
 
+  def test_add_vat
+    rs = Cash.new(100, :vat_included => :false)
+    rs.add_vat
+    assert_equal rs.cents, 120
+    assert_equal rs.vat_included?, true
+  end
+
+  def test_add_vat_when_already_added
+    rs = Cash.new(120, :vat_included => :true)
+    rs.add_vat
+    assert_equal rs.cents, 120
+    assert_equal rs.vat_included?, true
+  end
+
+  def test_remove_vat
+    rs = Cash.new(120, :vat_included => :true)
+    rs.remove_vat
+    assert_equal rs.cents, 100
+    assert_equal rs.vat_included?, false
+  end
+
+  def test_remove_vat_when_already_removed
+    rs = Cash.new(100, :vat_included => :false)
+    rs.remove_vat
+    assert_equal rs.cents, 100
+    assert_equal rs.vat_included?, false
+  end
+
   # factories
   def cash_with_vat
     Cash.new(100, :vat_included => :true)
@@ -507,6 +535,7 @@ class TestCash < MiniTest::Unit::TestCase
   def cash_without_vat
     Cash.new(100, :vat_included => :false)
   end
+  # /factories
 
   def test_mixed_vat_values
     addition = cash_with_vat + cash_without_vat

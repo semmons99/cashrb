@@ -101,7 +101,8 @@ price.to_cash #=> Cash.new(price)
 123.45.to_cash(from: :decimal) #=> Cash.new(123.45, from: :decimal)
 
 # VAT options
-# Cash objects can track whether they have had VAT applied to them or not, and offer some convenience methods for checking:
+# Cash objects can track whether they have had VAT applied to them or not, and offer some
+# convenience methods for checking:
 
 n = Cash.new(100)
 n.vat_included? #=> false
@@ -147,6 +148,32 @@ mixed_vat_statuses.vat_included? #=> false
 
 mixed_vat_statuses.vat_mixed? #=> true
 
-# We've just provided the queries for you to check in your own code. No errors are thrown when vat is calculated on a mixed status cash object.
+# We've just provided the queries for you to check in your own code.
+# No errors are thrown when vat is calculated on a mixed status cash object.
+
+# If you want to modify the Cash object in place, call .add_vat or .remove_vat
+
+n = Cash.new(100, :vat_included => :false) #VAT inclusion is false by default - this is just for clarity
+n.cents #=> 100
+n.add_vat
+n.cents #=> 120
+n.vat_included? #=> true
+
+# remove VAT
+
+n = Cash.new(120, :vat_included => :true)
+n.cents #=> 120
+n.remove_vat
+n.cents #=> 100
+n.vat_included? #=> false
+
+# If VAT is already included, add_vat won't do anything (Same goes for remove_vat when it isn't already included)
+
+n = Cash.new(120), :vat_included => :true)
+n.cents #=> 120
+n.add_vat
+n.cents #=> 120
+n.vat_included? #=> true
+
 
 ```
