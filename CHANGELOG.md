@@ -1,3 +1,7 @@
+cashrb v1.5.2
+=============
+ - made .add_vat and .remove_vat methods return self to allow for chained operations
+
 cashrb v1.5.1
 =============
  - added .add_vat and .remove_vat methods that operate on the object itself

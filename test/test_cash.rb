@@ -514,6 +514,11 @@ class TestCash < MiniTest::Unit::TestCase
     assert_equal rs.vat_included?, true
   end
 
+  def test_add_vat_returns_self
+    rs = Cash.new(100, :vat_included => :false)
+    assert_equal rs.add_vat, rs
+  end
+
   def test_remove_vat
     rs = Cash.new(120, :vat_included => :true)
     rs.remove_vat
@@ -526,6 +531,11 @@ class TestCash < MiniTest::Unit::TestCase
     rs.remove_vat
     assert_equal rs.cents, 100
     assert_equal rs.vat_included?, false
+  end
+
+  def test_remove_vat_returns_self
+    rs = Cash.new(120, :vat_included => :true)
+    assert_equal rs.remove_vat, rs
   end
 
   # factories

@@ -114,11 +114,13 @@ class Cash
   def add_vat
     @cents = cents_plus_vat
     @vat_included = :true
+    self
   end
 
   def remove_vat
     @cents = cents_less_vat
     @vat_included = :false
+    self
   end
 
   def +(value)
