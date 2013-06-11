@@ -112,7 +112,7 @@ class Cash
   alias_method :pence_less_vat, :cents_less_vat
 
   def +(value)
-    Cash.new(@cents + value.cents, new_options)
+    Cash.new(@cents + value.cents, new_options(value))
   end
 
   def -(value)
@@ -170,8 +170,16 @@ class Cash
     self
   end
 
+  def vat_status
+    @vat_included
+  end
+
   def vat_included?
-    @vat_included == :true
+    vat_status == :true
+  end
+
+  def vat_mixed?
+    vat_status == :mixed
   end
 
   CURRENCY_AWARE_METHODS.each do |mth|
@@ -240,14 +248,20 @@ class Cash
   rescue NoMethodError
   end
 
-  def new_options
+  def update_vat_status(new_vat_status)
+    if @vat_included != new_vat_status
+      @vat_included = :mixed
+    end
+  end
+
+  def new_options(value=self)
     {
       :cents_in_whole  => @cents_in_whole,
       :rounding_method => @rounding_method,
       :currency        => @currency,
       :from            => :cents,
       :vat             => @vat,
-      :vat_included    => @vat_included
+      :vat_included    => update_vat_status(value.vat_status)
     }
   end
 
