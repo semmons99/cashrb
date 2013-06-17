@@ -1,3 +1,7 @@
+cashrb v1.5.3
+=============
+ - fixed bug that stopped vat status transferring correctly on calculations, and added status transfer to all calculations
+
 cashrb v1.5.2
 =============
  - made .add_vat and .remove_vat methods return self to allow for chained operations
