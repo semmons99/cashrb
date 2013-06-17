@@ -132,35 +132,35 @@ class Cash
   end
 
   def -@
-    Cash.new(-@cents, new_options(value))
+    Cash.new(-@cents, new_options)
   end
 
   def *(value)
-    Cash.new(@cents * bd(value), new_options(value))
+    Cash.new(@cents * bd(value), new_options)
   end
 
   def /(value)
     @cents / value.cents
   rescue NoMethodError
-    Cash.new(@cents / bd(value), new_options(value))
+    Cash.new(@cents / bd(value), new_options)
   end
 
   def %(value)
-    Cash.new(@cents % value.cents, new_options(value))
+    Cash.new(@cents % value.cents, new_options)
   rescue NoMethodError
-    Cash.new(@cents % bd(value), new_options(value))
+    Cash.new(@cents % bd(value), new_options)
   end
 
   def divmod(value)
     quotient, remainder = @cents.divmod value.cents
-    [quotient, Cash.new(remainder, new_options(value))]
+    [quotient, Cash.new(remainder, new_options)]
   rescue NoMethodError
     quotient, remainder = @cents.divmod bd(value)
-    [Cash.new(quotient, new_options(value)), Cash.new(remainder, new_options(value))]
+    [Cash.new(quotient, new_options), Cash.new(remainder, new_options)]
   end
 
   def abs
-    Cash.new(@cents.abs, new_options(value))
+    Cash.new(@cents.abs, new_options)
   end
 
   def <=>(value)

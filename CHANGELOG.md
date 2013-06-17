@@ -1,6 +1,6 @@
 cashrb v1.5.3
 =============
- - fixed bug that stopped vat status transferring correctly on calculations, and added status transfer to all calculations
+ - fixed bug that stopped vat status transferring correctly on calculations
 
 cashrb v1.5.2
 =============
