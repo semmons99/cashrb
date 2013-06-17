@@ -262,7 +262,9 @@ class Cash
 
   def update_vat_status(new_vat_status)
     if @vat_included != new_vat_status
-      @vat_included = :mixed
+      :mixed
+    else
+      vat_status
     end
   end
 

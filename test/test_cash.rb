@@ -547,6 +547,16 @@ class TestCash < MiniTest::Unit::TestCase
   end
   # /factories
 
+  def test_addition_with_vat_included_retains_vat_status
+    both_with = cash_with_vat + cash_with_vat
+    assert both_with.vat_included?
+  end
+
+  def test_addition_without_vat_included_retains_vat_status
+    both_without = cash_without_vat + cash_without_vat
+    refute both_without.vat_included?
+  end
+
   def test_mixed_vat_values
     addition = cash_with_vat + cash_without_vat
     refute addition.vat_included?, 'vat seems to be included'
